@@ -6,7 +6,7 @@ Param(
     [parameter(Mandatory=$true)][string]$patToken
 )
 
-$gitContext = "https://github.com/$gitUser/$repoName"
+$gitContext = "https://github.com/$gitUser/$repoName.git"
 
 $services = @( 
     @{ Name="eshopbasket"; Image="eshop/basket.api"; File="src/Services/Basket/Basket.API/Dockerfile" },
@@ -29,5 +29,6 @@ $services |% {
     $bimg = $_.Image
     $bfile = $_.File
     Write-Host "Setting ACR build $bname ($bimg)"    
-    az acr build-task create --registry $acrName --name $bname --image ${bimg}:$gitBranch --context $gitContext --branch $gitBranch --git-access-token $patToken --file $bfile
+    # az acr build-task create --registry $acrName --name $bname --image ${bimg}:$gitBranch --context $gitContext --branch $gitBranch --git-access-token $patToken --file $bfile
+    az acr task create --registry $acrName --name $bname --image ${bimg}:$gitBranch --context $gitContext --git-access-token $patToken --file $bfile
 }
