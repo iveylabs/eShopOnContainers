@@ -9,8 +9,8 @@ docker-compose*.yml
 hosts
 LICENSE
 *.testsettings
-**/bin/
-**/obj/
+**/bin
+**/obj
 **/node_modules/
 **/bower_components/
 **/wwwroot/lib/
@@ -21,3 +21,5 @@ packages/
 test-results/
 TestResults/
 Mobile/
+bin/
+obj/
